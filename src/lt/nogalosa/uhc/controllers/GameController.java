@@ -34,12 +34,46 @@ public class GameController {
                         case 3:
                         case 2:
                         case 1:
-                            Msg.sa("§aŽaidimas prasideda už: §l"+timeLeft+"s.");
+                            Msg.sa("§aŽaidimas prasideda už: §l"+timeLeft+" sek.");
                             break;
                         case 0:
                             Msg.sa("§e§lŽAIDIMAS PRASIDEDA!");
                             setPeriod(Period.TELEPORTING);
                             break;
+                    }
+                }
+                if(period == Period.TELEPORTING) {
+                    if(timeLeft == 0){
+                        setPeriod(Period.GRACE);
+                    }
+                }
+                if(period == Period.GRACE) {
+                    switch (timeLeft) {
+                        case 60:
+                        case 30:
+                        case 15:
+                        case 10:
+                        case 5:
+                        case 4:
+                        case 3:
+                        case 2:
+                        case 1:
+                            Msg.sa("§aGrace periodas baigiasi už: §l"+timeLeft+" sek.");
+                            break;
+                        case 0:
+                            setPeriod(Period.GAME);
+                            break;
+                    }
+                }
+                if(period == Period.GAME) {
+                    switch (timeLeft) {
+                        case 600:
+                        case 300:
+                        case 60:
+                            Msg.sa("§aIki visiško žemėlapio susitraukimo liko: §l"+timeLeft+" sek.");
+                            break;
+                        case 0:
+                            setPeriod(Period.FINISHED);
                     }
                 }
             }
@@ -62,9 +96,13 @@ public class GameController {
             case GRACE:
                 this.timeLeft = 60 * 20;
                 this.clearPlayers();
+                for (int i = 0; i < 5; i++)
+                    Msg.sa("§a§lGRACE PERIODAS PRASIDEDA!");
                 break;
             case GAME:
                 this.timeLeft = 60 * 100;
+                for (int i = 0; i < 5; i++)
+                    Msg.sa("§a§lGRACE PERIODAS PASIBAIGĖ!");
                 break;
             case FINISHED:
                 this.timeLeft = Integer.MAX_VALUE;

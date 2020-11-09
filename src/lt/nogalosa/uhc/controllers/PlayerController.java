@@ -57,6 +57,10 @@ public class PlayerController {
         }
     }
 
+    public CopyOnWriteArrayList<UPlayer> getPlayers() {
+        return players;
+    }
+
     public void playerDeath(Player pl, Entity damager) {
         if(GameController.getInstance().getPeriod() == Period.PREGAME || GameController.getInstance().getPeriod() == Period.STARTING)
             return;
