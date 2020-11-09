@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerLoginListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
     }
 
     @Override

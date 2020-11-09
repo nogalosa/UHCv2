@@ -1,5 +1,6 @@
 package lt.nogalosa.uhc.controllers;
 
+import lt.nogalosa.uhc.Config;
 import lt.nogalosa.uhc.Main;
 import lt.nogalosa.uhc.Period;
 import lt.nogalosa.uhc.models.UPlayer;
@@ -34,7 +35,7 @@ public class GameController {
                         case 3:
                         case 2:
                         case 1:
-                            Msg.sa("§aŽaidimas prasideda už: §l"+timeLeft+" sek.");
+                            Msg.sa("§aŽaidimas prasideda už §l"+formatTimeleftKilm(timeLeft));
                             break;
                         case 0:
                             Msg.sa("§e§lŽAIDIMAS PRASIDEDA!");
@@ -49,6 +50,8 @@ public class GameController {
                 }
                 if(period == Period.GRACE) {
                     switch (timeLeft) {
+                        case 300:
+                        case 120:
                         case 60:
                         case 30:
                         case 15:
@@ -58,7 +61,7 @@ public class GameController {
                         case 3:
                         case 2:
                         case 1:
-                            Msg.sa("§aGrace periodas baigiasi už: §l"+timeLeft+" sek.");
+                            Msg.sa("§aGrace periodas baigiasi už: §l"+formatTimeleftKilm(timeLeft));
                             break;
                         case 0:
                             setPeriod(Period.GAME);
@@ -70,7 +73,7 @@ public class GameController {
                         case 600:
                         case 300:
                         case 60:
-                            Msg.sa("§aIki visiško žemėlapio susitraukimo liko: §l"+timeLeft+" sek.");
+                            Msg.sa("§aIki visiško žemėlapio susitraukimo liko: §l"+formatTimeleftKilm(timeLeft));
                             break;
                         case 0:
                             setPeriod(Period.FINISHED);
@@ -103,7 +106,9 @@ public class GameController {
             case GAME:
                 this.timeLeft = 60 * 100;
                 for (int i = 0; i < 5; i++)
-                    Msg.sa("§a§lGRACE PERIODAS PASIBAIGĖ!");
+                    Msg.sa("§e§lGRACE PERIODAS PASIBAIGĖ!");
+                Msg.sa("§c§lPasaulis pradėjo trauktis!");
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set 10 " + 60*1000);
                 break;
             case FINISHED:
                 this.timeLeft = Integer.MAX_VALUE;
@@ -139,6 +144,38 @@ public class GameController {
     }
 
     public void startGame() {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder center " + Config.WORLD_CENTER_X + " " + Config.WORLD_CENTER_Z);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set " + Math.max(Config.WORLD_SIZE_X, Config.WORLD_SIZE_Z));
         this.setPeriod(Period.STARTING);
+    }
+
+    private String formatTimeleft(int timeLeft) {
+        String endM = "minutės";
+        if((timeLeft / 60) % 10 == 1) {
+            endM = "minutė";
+        }
+        if(((timeLeft / 60) > 10 && (timeLeft / 60) < 20) || (timeLeft / 60) % 10 == 0) {
+            endM = "minučių";
+        }
+        String endS = "sekundės";
+        if(timeLeft % 10 == 1) {
+            endS = "sekundė";
+        }
+        if((timeLeft > 10 && timeLeft < 20) || timeLeft % 10 == 0) {
+            endS = "sekundžių";
+        }
+        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM : "") + " " + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endM) : "");
+    }
+
+    private String formatTimeleftKilm(int timeLeft) {
+        String endM = "minučių";
+        if((timeLeft / 60) % 10 == 1) {
+            endM = "minutės";
+        }
+        String endS = "sekundžių";
+        if(timeLeft % 10 == 1) {
+            endS = "sekundės";
+        }
+        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM : "") + " " + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endM) : "");
     }
 }

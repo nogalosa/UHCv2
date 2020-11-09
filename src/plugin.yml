@@ -2,3 +2,4 @@ name: RFCUHC
 version: 1
 main: lt.nogalosa.uhc.Main
 commands:
+  uhc:

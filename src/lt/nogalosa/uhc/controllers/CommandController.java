@@ -17,7 +17,8 @@ public class CommandController {
                 Msg.s(sender, "/uhc start - pradėti žaidimą");
             }
             if(args.length > 0) {
-                if(args[0] == "start"){
+                if(args[0].equalsIgnoreCase("start")){
+                    Msg.s(sender, "Žaidimas pradedamas.");
                     GameController.getInstance().startGame();
                 }
             }

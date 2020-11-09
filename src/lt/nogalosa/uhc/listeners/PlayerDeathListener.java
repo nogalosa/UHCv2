@@ -21,6 +21,7 @@ public class PlayerDeathListener implements Listener {
             player.setDead(true);
             event.getEntity().kickPlayer("§eJūs buvote nužudytas!\n\n§rNužudė: " + player.getKillerName() + "\n\n§cAčiū už žaidimą!\n§7Turnyro tiesioginę transliaciją galite stebėti mūsų kanaluose.");
         } else {
+            event.getDrops().clear();
             new BukkitRunnable() { // auto respawn
                 public void run() {
                     ((CraftPlayer) event.getEntity()).getHandle().playerConnection
