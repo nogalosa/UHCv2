@@ -1,8 +1,11 @@
 package lt.nogalosa.uhc;
 
+import lt.nogalosa.uhc.controllers.CommandController;
 import lt.nogalosa.uhc.listeners.*;
 import lt.nogalosa.uhc.utils.Msg;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
@@ -42,5 +45,11 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerLoginListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        CommandController.onCommand(sender, command, label, args);
+        return false;
     }
 }

@@ -72,8 +72,8 @@ public class UPlayer {
 
     public Location teleportRandom() {
         Player player = this.getPlayer();
-        int x = Main.getRandom().nextInt(Config.WORLD_SIZE_X) - Config.WORLD_SIZE_X / 2;
-        int z = Main.getRandom().nextInt(Config.WORLD_SIZE_Z) - Config.WORLD_SIZE_Z / 2;
+        int x = Main.getRandom().nextInt(Config.WORLD_SIZE_X) - Config.WORLD_SIZE_X / 2 + Config.WORLD_CENTER_X;
+        int z = Main.getRandom().nextInt(Config.WORLD_SIZE_Z) - Config.WORLD_SIZE_Z / 2 + Config.WORLD_CENTER_Z;
         World world = player.getWorld();
         Location to = world.getHighestBlockAt(x,z).getLocation().clone().add(0,1,0);
         player.teleport(to);

@@ -11,7 +11,7 @@ public class GameController {
 
     private static GameController instance;
     private Period period = Period.PREGAME;
-    private int timeLeft = 0;
+    private int timeLeft = Integer.MAX_VALUE;
 
     public static GameController getInstance() {
         if(instance == null)
@@ -76,6 +76,7 @@ public class GameController {
                             setPeriod(Period.FINISHED);
                     }
                 }
+                timeLeft--;
             }
         }.runTaskTimer(Main.getInstance(), 20, 20);
     }
