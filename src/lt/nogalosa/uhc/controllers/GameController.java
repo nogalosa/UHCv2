@@ -164,7 +164,7 @@ public class GameController {
         if((timeLeft > 10 && timeLeft < 20) || timeLeft % 10 == 0) {
             endS = "sekundžių";
         }
-        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM : "") + " " + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endM) : "");
+        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM + " " : "") + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endS) : "");
     }
 
     private String formatTimeleftKilm(int timeLeft) {
@@ -176,6 +176,6 @@ public class GameController {
         if(timeLeft % 10 == 1) {
             endS = "sekundės";
         }
-        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM : "") + " " + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endM) : "");
+        return (timeLeft / 60 != 0 ? timeLeft / 60 + " " + endM + " " : "") + (timeLeft % 60 != 0 ? (timeLeft % 60 + " " + endS) : "");
     }
 }
