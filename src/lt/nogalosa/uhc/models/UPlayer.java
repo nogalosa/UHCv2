@@ -15,6 +15,13 @@ public class UPlayer {
 
     UUID uuid;
 
+    boolean disconnected = false;
+    boolean dead = false;
+
+    String killerName;
+
+    int kills;
+
     public UPlayer(UUID uuid) {
         this.uuid = uuid;
     }
@@ -29,6 +36,38 @@ public class UPlayer {
 
     public Player getPlayer() {
         return Bukkit.getPlayer(this.uuid);
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        this.disconnected = disconnected;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public String getKillerName() {
+        return killerName;
+    }
+
+    public void setKillerName(String killerName) {
+        this.killerName = killerName;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
     }
 
     public Location teleportRandom() {

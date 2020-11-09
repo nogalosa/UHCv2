@@ -9,11 +9,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameController {
 
-    private GameController instance;
+    private static GameController instance;
     private Period period = Period.PREGAME;
     private int timeLeft = 0;
 
-    public GameController getInstance() {
+    public static GameController getInstance() {
         if(instance == null)
             instance = new GameController();
         return instance;

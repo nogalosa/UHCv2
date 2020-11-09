@@ -1,6 +1,6 @@
 package lt.nogalosa.uhc;
 
-import lt.nogalosa.uhc.listeners.PlayerJoinListener;
+import lt.nogalosa.uhc.listeners.*;
 import lt.nogalosa.uhc.utils.Msg;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,5 +35,12 @@ public class Main extends JavaPlugin {
 
     private void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDropItemListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDamageListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerLoginListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
     }
 }
